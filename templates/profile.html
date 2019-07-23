@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
+     <title>User Profile</title>
+     <link src="script/profile_script.js"></link>
   </head>
   <body>
-    <p>{{coffee_type}}</p>
-    <p>{{caffeine_amount}}</p>
+    <h1>Coffee Consumption Log</h1>
+    {% for coffee_entry in coffee_log %}
+      <ul>
+          <li>
+            Type: {{coffee_entry.type}}<br>
+            Caffeine Content: {{coffee_entry.caffeine_content}}
+         </li>
+      </ul>
+    {% endfor %}
   </body>
 </html>

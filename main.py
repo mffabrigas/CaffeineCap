@@ -32,18 +32,17 @@ class InputHandler(webapp2.RequestHandler):
         coffee_entry = Coffee_Entry(type=coffee_type, caffeine_content=caffeine_amount)
         coffee_entry.put()
 
+        coffee_log = Coffee_Entry.query().fetch()
         profile_template = jinja_env.get_template("templates/profile.html")
-
-        template_vars = {
-            "coffee_type": coffee_type,
-            "caffeine_amount": caffeine_amount,
-        }
-
-        self.response.write(profile_template.render(template_vars))
+        self.response.write(profile_template.render({"coffee_log": coffee_log}))
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
         print("ProfileHandler works!")
+        # 
+        # coffee_log = Coffee_Entry.query().fetch()
+        # profile_template = jinja_env.get_template("templates/profile.html")
+        # self.response.write(profile_template.render({"coffee_log": coffee_log}))
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
