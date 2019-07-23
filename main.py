@@ -18,21 +18,33 @@ class LoginHandler(webapp2.RequestHandler):
         print("LoginHandler works!")
 
 class InputHandler(webapp2.RequestHandler):
+    # renders index.html
     def get(self):
         print("InputHandler works!")
         input_template = jinja_env.get_template("templates/input.html")
         self.response.write(input_template.render())
 
+    # takes user input and renders it in profile.html
     def post(self):
         coffee_type = self.request.get("coffee_type")
         caffeine_amount = self.request.get("caffeine_amount")
 
-        print(coffee_type)
-        print(caffeine_amount)
+        profile_template = jinja_env.get_template("templates/profile.html")
+
+        template_vars = {
+            "coffee type": coffee_type,
+            "caffeine amount": caffeine_amount,
+        }
+
+        self.response.write(profile_template.render(template_vars))
+
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
         print("ProfileHandler works!")
+
+        # print(coffee_type)
+        # print(caffeine_amount)
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
