@@ -1,6 +1,7 @@
 import webapp2
 import jinja2
 import os
+from app_models import User, Coffee_Entry
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -10,7 +11,6 @@ jinja_env = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-
         print("MainHandler works!")
 
 class LoginHandler(webapp2.RequestHandler):
@@ -27,24 +27,23 @@ class InputHandler(webapp2.RequestHandler):
     # takes user input and renders it in profile.html
     def post(self):
         coffee_type = self.request.get("coffee_type")
-        caffeine_amount = self.request.get("caffeine_amount")
+        caffeine_amount = int(self.request.get("caffeine_amount"))
+
+        coffee_entry = Coffee_Entry(type=coffee_type, caffeine_content=caffeine_amount)
+        coffee_entry.put()
 
         profile_template = jinja_env.get_template("templates/profile.html")
 
         template_vars = {
-            "coffee type": coffee_type,
-            "caffeine amount": caffeine_amount,
+            "coffee_type": coffee_type,
+            "caffeine_amount": caffeine_amount,
         }
 
         self.response.write(profile_template.render(template_vars))
 
-
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
         print("ProfileHandler works!")
-
-        # print(coffee_type)
-        # print(caffeine_amount)
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
