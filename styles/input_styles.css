@@ -1,0 +1,47 @@
+body{
+  background-color: #e0bca6;
+  /* height:100%; */
+}
+
+.coffee_log{
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  padding: 10%;
+  background-color: #40200d;
+  margin:15%;
+  align-content: center;
+  justify-content: center;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  height: 20%;
+  min-width: 300px;
+  min-height: 200px;
+}
+h1{
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
+  color: white;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  margin: 10%;
+}
+
+ .putCoff{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin:auto;
+   padding-left: 20%;
+   padding-right: 20%;
+   margin-top: 5%;
+   margin-bottom: 5%;
+
+}
+
+placeholder {
+  align-items: center;
+  justify-content: center;
+  font-style:
+}
