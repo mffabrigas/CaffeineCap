@@ -3,6 +3,7 @@ from google.appengine.ext import ndb
 class Coffee_Entry(ndb.Model):
     type =  ndb.StringProperty(required=True)
     caffeine_content =  ndb.IntegerProperty(required=True)
+    time = ndb.StringProperty(required=True)
 
 #One to Many
 class User(ndb.Model):
