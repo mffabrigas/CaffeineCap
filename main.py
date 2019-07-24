@@ -1,6 +1,7 @@
 import webapp2
 import jinja2
 import os
+import time
 from app_models import User, Coffee_Entry
 
 jinja_env = jinja2.Environment(
@@ -54,13 +55,16 @@ class ProfileHandler(webapp2.RequestHandler):
         print("==========User input taken==========")
 
         #creates and enters Coffee_Entry entity into datastore based on user input
-        coffee_entry = Coffee_Entry(type=coffee_type, caffeine_content=caffeine_amount)
+        coffee_entry = Coffee_Entry(type=coffee_type,
+                                    caffeine_content=caffeine_amount,
+                                    time=time.strftime('%l:%M%p %Z on %b %d, %Y')
+                                    )
         print("Coffee entry entity created: " + str(coffee_entry))
 
         coffee_entry.put()
         print("==========Coffee_Entry put==========")
 
-        coffee_log = Coffee_Entry.query().fetch()
+        coffee_log = Coffee_Entry.query().order(Coffee_Entry.time).fetch()
         print("List of Coffee_Entry entities: \n" + str(coffee_log))
         profile_template = jinja_env.get_template("templates/profile.html")
         self.response.write(profile_template.render({"coffee_log": coffee_log, "new_log": coffee_entry}))
