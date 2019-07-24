@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
+     <title>User Coffee Profile</title>
+     <link src="script/profile_script.js"></link>
   </head>
   <body>
-    <p>{{coffee_type}}</p>
-    <p>{{caffeine_amount}}</p>
+    <div class="coffee_log">
+      <h1>Coffee Consumption Log</h1>
+      <ul>
+          <li>
+            default new <br>
+            Type: {{new_log.type}}<br>
+            Caffeine Content: {{new_log.caffeine_content}}
+          </li>
+          {% for coffee_entry in coffee_log %}
+          <li>
+            Type: {{coffee_entry.type}}<br>
+            Caffeine Content: {{coffee_entry.caffeine_content}}
+          </li>
+          {% endfor %}
+      </ul>
+    </div>
+    <div class="navigation_buttons">
+      <form method="get" action="http://localhost:8080/input">
+        <input type="submit" value="Add Input"/>
+      </form>
+    </div>
   </body>
 </html>
