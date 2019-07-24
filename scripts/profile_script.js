@@ -1,5 +1,5 @@
-function init() {
-  
-}
-
 $(document).ready(init);
+
+function init() {
+  $("#input").click.(input);
+}
