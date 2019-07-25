@@ -16,8 +16,8 @@ class MainHandler(webapp2.RequestHandler):
 
 class LoginHandler(webapp2.RequestHandler):
     def get(self):
-        welcome_template = jinja_env.get_template('templates/welcome.html')
-        self.response.write(welcome_template.render())
+        login_template = jinja_env.get_template('templates/login.html')
+        self.response.write(login_template.render())
 
 
 class InputHandler(webapp2.RequestHandler):

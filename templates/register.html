@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-    <script src = "main.js"></script>
-
+    <link rel="stylesheet" href="../styles/register_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title></title>
+    <title>CoffeeCap | Register</title>
   </head>
   <body>
+    <div class = "topBar">
+      CoffeeCap
+    </div>
+    <div class = "registerBox">
+    <h2>  Register Here</h2>
     <form action = "/register" method = "post">
-      First Name
       <input type = "text"  id = "register-firstname" name = "register_username"placeholder = "First Name" required>
       <br>
-      Last Name
       <input type = "text" id = "register-lastname" name = "register_lastname" placeholder = "Last Name" required>
-      <br>
-        Username
+
         <input type = "text" id = "register-username" name = "register_username" placeholder = "Username" required>
-        <br>
-        Password
+
         <input type = "password" id = "register-password" name = "register_password" placeholder = "Password" required>
-        <br>
-        Email
+
         <input type = "text" id = "register-email" name = "register_email" placeholder = "Email" required>
-        <br>
-        <input id = "register-button" type="submit" value="register">
-    </form>
-    Already Registered? <a href = "login.html" > Login</a>
+        <input id = "register-button" type="submit" value="Register">
+        Already Registered?  <a href = "/login" > Login</a>
+    </div>
+
   </body>
 </html>
