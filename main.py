@@ -91,6 +91,6 @@ app = webapp2.WSGIApplication([
     ("/", MainHandler),
     ("/login", LoginHandler),
     ("/input", InputHandler),
-    ("/register"), RegisterHandler),
+    ("/register", RegisterHandler),
     ("/profile", ProfileHandler),
 ], debug=True)
