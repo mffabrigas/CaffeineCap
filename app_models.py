@@ -7,6 +7,8 @@ class Coffee_Entry(ndb.Model):
 
 #One to Many
 class User(ndb.Model):
+    firstname = ndb.StringProperty(required=True)
+    lastname = ndb.StringProperty(required=True)
     username = ndb.StringProperty(required=True)
     password = ndb.StringProperty(required=True)
-    coffee_log = ndb.KeyProperty(Coffee_Entry, repeated=True)
+    email = ndb.StringProperty(required=True)

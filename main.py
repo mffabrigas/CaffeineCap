@@ -16,7 +16,9 @@ class MainHandler(webapp2.RequestHandler):
 
 class LoginHandler(webapp2.RequestHandler):
     def get(self):
-        print("LoginHandler works!")
+        welcome_template = jinja_env.get_template('templates/welcome.html')
+        self.response.write(welcome_template.render())
+
 
 class InputHandler(webapp2.RequestHandler):
     # renders index.html
@@ -31,6 +33,20 @@ class InputHandler(webapp2.RequestHandler):
 
         input_template = jinja_env.get_template("templates/input.html")
         self.response.write(input_template.render())
+
+class RegisterHandler(webapp2.RequestHandler):
+    def get(self):
+        register_template = jinja_env.get_template('templates/register.html')
+        self.response.write(register_template.render())
+
+    def post(self):
+        register_firstname = self.request.get('register_firstname')
+        register_lastname = self.request.get('register_lastname')
+        register_username = self.request.get('register_username')
+        register_password = self.request.get('register_password')
+        register_email = self.request.get('register_email')
+        new_user = User(firstname = register_firstname, lastname = register_lastname, username = register_username, password = register_password, email = register_email)
+        new_user.put()
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -75,5 +91,6 @@ app = webapp2.WSGIApplication([
     ("/", MainHandler),
     ("/login", LoginHandler),
     ("/input", InputHandler),
+    ("/register"), RegisterHandler),
     ("/profile", ProfileHandler),
 ], debug=True)
