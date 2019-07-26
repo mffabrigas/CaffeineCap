@@ -15,18 +15,13 @@
             Caffeine Content: {{coffee_entry.caffeine_content}}
           </li>
           {% endfor %}
-          <li>
-            default new <br>
-            Time: {{new_log.time}}<br>
-            Type: {{new_log.type}}<br>
-            Caffeine Content: {{new_log.caffeine_content}}
-          </li>
       </ul>
     </div>
     <div class="navigation_buttons">
-      <form method="get" action="http://localhost:8080/input">
+      <form method="get" action="/input">
         <input type="submit" value="Add Input"/>
       </form>
+      <a href={{logout_url}} >Logout</a>
     </div>
   </body>
 </html>
