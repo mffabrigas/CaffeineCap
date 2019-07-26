@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="../styles/register_style.css">
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+    <script src = "main.js"></script>
+    <link rel="stylesheet" href="../styles/login_style.css">
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <title>CoffeeCap | Register</title>
@@ -13,7 +20,8 @@
     <div class = "registerBox">
     <h2>  Register Here</h2>
     <form action = "/register" method = "post">
-      <input type = "text"  id = "register-firstname" name = "register_username"placeholder = "First Name" required>
+      First Name
+      <input type = "text"  id = "register-firstname" name = "register_firstname"placeholder = "First Name" required>
       <br>
       <input type = "text" id = "register-lastname" name = "register_lastname" placeholder = "Last Name" required>
 

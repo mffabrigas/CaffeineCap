@@ -8,13 +8,18 @@
   </head>
   <body>
     <div class="coffee_log">
-      <h1>Coffee Log</h1>
+      <div id="siteHead">
+        <h1>Coffee Log</h1>
+        <p id="little"> by CoffeeCap</p>
+      </div>
+      <h1>Welcome, {{user_nickname}}, to CoffeeCap</h1>
       <p id="little"> by CoffeeCap</p>
-      <form method="post" action="http://localhost:8080/profile">
-        <input type="text" name="coffee_type" placeholder="Coffee Type" class="putCoff"> <br>
-        <input type="text" name="caffeine_amount" placeholder="Caffeine Amount" class="putCoff"> <br>
+      <form method="post" action="/profile">
+        <input type="text" name="coffee_type" placeholder="Coffee Type" class="putCoff" required> <br>
+        <input type="text" name="caffeine_amount" placeholder="Caffeine Amount" class="putCoff"required> <br>
         <input type="submit" value="Submit" class= "putCoff">
       </form>
+      <a href={{logout_url}}>Logout</a>
     </div>
   </body>
 </html>

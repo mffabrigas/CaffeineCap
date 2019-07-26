@@ -7,8 +7,12 @@ class Coffee_Entry(ndb.Model):
 
 #One to Many
 class User(ndb.Model):
-    firstname = ndb.StringProperty(required=True)
-    lastname = ndb.StringProperty(required=True)
-    username = ndb.StringProperty(required=True)
-    password = ndb.StringProperty(required=True)
-    email = ndb.StringProperty(required=True)
+    user_id = ndb.IntegerProperty(required=True)
+    coffee_entries = ndb.KeyProperty(Coffee_Entry, repeated=True)
+
+    @classmethod
+    def get_by_user(cls, user):
+        return cls.query().filter(cls.user_id == user.user_id()).get()
+
+    def get_coffee_entries(cls):
+        return cls.query()
