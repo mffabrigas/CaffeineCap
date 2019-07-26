@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+\
     <script src = "login.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous">
     </script>
+
+    <link rel="stylesheet" href="../styles/login_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>CoffeeCap | Login</title>
   </head>
   <body>
-    <form method="post">
+
+    <div class="topBar">
+      CoffeeCap
+    </div>
+    <div class="loginBox">
+      <form method="post">
       <input type="text" name="login-username" placeholder="Username" required>
       <input type="password" name="login-password" placeholder="Password" required>
       <input type="submit" value="Login">
@@ -19,5 +28,11 @@
     <p>{{login_fail}}</p>
     Not Registered?
     <a href = "/register">Register</a>
+    </div>
+=======
+
+
+
+
   </body>
 </html>

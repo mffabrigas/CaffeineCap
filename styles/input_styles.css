@@ -1,49 +1,75 @@
-body {
-  background-color: #e0bca6;
-  height:100%;
+body{
+  background-image: url(chair-coffee-shop-counter-597929.jpg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: none;
+  margin: none;
+  background-size: 100%;
 }
 
-.coffee_log {
-  display: flex;
+.coffee_log{
   flex-direction: column;
   flex-flow: column;
   padding: 10%;
   background-color: #40200d;
-  margin:15%;
+  margin:5%;
   align-content: center;
   justify-content: center;
-  padding-top: 10%;
-  padding-bottom: 10%;
-  height: 20%;
-  min-width: 300px;
-  min-height: 200px;
-  max-height: 400px;
-  max-width: 700px;
+
 }
 
-h1 {
+#siteHead{
+  align-items: center;
+}
+
+h1{
   font-family: 'Pacifico', cursive;
   font-size: 30px;
   color: white;
   font-weight: lighter;
-  align-items: center;
   justify-content: center;
   margin: 10%;
+  padding:2%;
+  align-self: center;
 }
 
-.putCoff {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin:auto;
-  padding-left: 20%;
-  padding-right: 20%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+
+.putCoff{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin:auto;
+   padding-left: 20%;
+   padding-right: 20%;
+   margin-top: 5%;
+   margin-bottom: 5%;
+
 }
+
 
 placeholder {
   align-items: center;
   justify-content: center;
   font-style:
+}
+
+#subCof{
+  background-color: #e0bca6;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#subCof:hover {
+  background-color: black;
+  color: #e0bca6;
 }
