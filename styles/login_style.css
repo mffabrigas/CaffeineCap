@@ -3,13 +3,16 @@ body{
   padding: 0;
   background: url(../styles/background.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
+  height: auto;
+
 }
 .topBar{
   padding-top: 40px;
-  width: 100%;
+  margin: 0 auto;
+  width: 30vh;
   height: 40px;
   color: #fff;
-  text-align: center;
   font-size: 60px;
   font-family: "Pacifico", cursive;
 }
@@ -24,6 +27,7 @@ body{
   box-sizing: border-box;
   background: rgba(0,0,0,0.5);
   padding: 20px 40px;
+  margin: auto;
   border-radius: 10px;
   box-shadow: 1px 1px 10px #000;
 }
@@ -67,4 +71,13 @@ h2{
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
+}
+.error {
+	border-color: red;
+}
+
+.error-message {
+	color: red;
+	font-style: italic;
+	margin-bottom: 1em;
 }

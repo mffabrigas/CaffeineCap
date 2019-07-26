@@ -12,7 +12,8 @@ jinja_env = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        print("MainHandler works!")
+        main_template = jinja_env.get_template('templates/main.html')
+        self.response.write(main_template.render())
 
 class LoginHandler(webapp2.RequestHandler):
     def get(self):

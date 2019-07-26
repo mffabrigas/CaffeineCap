@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="../styles/login_style.css">
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer/dist/bouncer.polyfills.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <title>CoffeeCap | Login</title>
@@ -14,11 +15,13 @@
       <form class="" action="" method="post">
         <h2>Login Here</h2>
         <input type="text" id = "login-username" placeholder="Username" required>
-        <input type="password" id = "login-password" placeholder="Password" required>
+        <input type="password" min = "32" id = "login-password" placeholder="Password" required>
         <input type="submit" value="Login">
             Not Registered? <a href = "/register" > Register</a>
       </form>
     </div>
-
+    <script>
+	var validate = new Bouncer('form');
+  </script>
   </body>
 </html>
