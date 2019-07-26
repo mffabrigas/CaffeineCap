@@ -6,7 +6,8 @@
   </head>
   <body>
     <div class="coffee_log">
-      <h1>Coffee Consumption Log</h1>
+      <h1>Welcome, {{user_nickname}}</h1>
+      <h2>Coffee Consumption Log</h2>
       <ul>
           {% for coffee_entry in coffee_log %}
           <li>
@@ -15,8 +16,13 @@
             Caffeine Content: {{coffee_entry.caffeine_content}}
           </li>
           {% endfor %}
-      </ul>
+      </ul><br>
+      You have had {{total_caffeine}} mg of caffeine today.<br>
+      {% if total_caffeine > 400%}
+      You have exceeded 400 mg of caffeine, please cut back from now on.
+      {% endif %}
     </div>
+
     <div class="navigation_buttons">
       <form method="get" action="/input">
         <input type="submit" value="Add Input"/>
