@@ -8,6 +8,7 @@ class Coffee_Entry(ndb.Model):
 #One to Many
 class User(ndb.Model):
     user_id = ndb.StringProperty(required=True)
+    phone_number = ndb.StringProperty(required=True)
     coffee_entries = ndb.KeyProperty(Coffee_Entry, repeated=True)
 
     @classmethod

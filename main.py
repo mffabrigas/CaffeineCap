@@ -5,6 +5,15 @@ import time
 from google.appengine.api import users
 from app_models import User, Coffee_Entry
 
+# Download the helper library from https://www.twilio.com/docs/python/install
+# from twilio.rest import Client
+
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+# account_sid = 'ACf685fe7e50b6b180c603855486614139'
+# auth_token = 'e7e6abe43ba7156c5efcd19baf64c0b0'
+# client = Client(account_sid, auth_token)
+
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -59,8 +68,7 @@ class InputHandler(webapp2.RequestHandler):
 
         #class method to check if user exists
         if not User.get_by_user(user):
-            new_user = User(user_id=user_id)
-            new_user.put()
+            self.redirect("/setup")
 
         # self.response.write('Hello, ' + nickname + '!')
 
@@ -96,6 +104,23 @@ class InputHandler(webapp2.RequestHandler):
         # print("==========Coffee_Entry put==========")
         #
         # self.redirect("/profile")
+
+class SetupHandler(webapp2.RequestHandler):
+    def get(self):
+        setup_template = jinja_env.get_template('templates/setup.html')
+        self.response.write(setup_template.render())
+
+    def post(self):
+        user = users.get_current_user()
+        user_id = user.user_id()
+
+        number = self.request.get("phone_number")
+
+        user=User(user_id=user_id, phone_number=number)
+        user.put()
+
+        self.redirect("/input")
+
 
 class ProfileHandler(webapp2.RequestHandler):
     # coffee_entry = None
@@ -154,6 +179,14 @@ class ProfileHandler(webapp2.RequestHandler):
         for coffee_entry in coffee_log:
             total_caffeine = total_caffeine + coffee_entry.caffeine_content
 
+        # if total_caffeine > 400:
+        #     message = client.messages \
+        #         .create(
+        #              body="Please stop drinking coffee for the sake of your health",
+        #              from_='+19728939502',
+        #              to='+14059820806'
+        #          )
+
         print("user coffee entries: " + str(coffee_log))
 
         print("List of Coffee_Entry entities: \n" + str(coffee_log))
@@ -175,8 +208,7 @@ class ProfileHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
-    #("/login", LoginHandler),
-    #("/register", RegisterHandler),
+    ("/setup", SetupHandler)
     ("/input", InputHandler),
     ("/profile", ProfileHandler),
 ], debug=True)
