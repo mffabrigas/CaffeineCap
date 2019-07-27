@@ -24,7 +24,18 @@ current_user_key = None
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        print("MainHandler works!")
+        main_template = jinja_env.get_template('templates/main.html')
+        self.response.write(main_template.render())
+
+class LoginHandler(webapp2.RequestHandler):
+    def get(self):
+        login_template = jinja_env.get_template('templates/login.html')
+        self.response.write(login_template.render())
+
+class RegisterHandler(webapp2.RequestHandler):
+    def get(self):
+        register_template = jinja_env.get_template('templates/register.html')
+        self.response.write(register_template.render())
 
         user = users.get_current_user()
 
@@ -208,7 +219,7 @@ class ProfileHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
-    ("/setup", SetupHandler)
+    ("/setup", SetupHandler),
     ("/input", InputHandler),
     ("/profile", ProfileHandler),
 ], debug=True)
