@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="../styles/output_style.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <section>
+      <h1>Welcome, {{user_nickname}}</h1>
+      <h2>CoffeeCap</h2>
+      <div class="full_table">
+
+        <div class="tbl-header">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>Coffee</th>
+                <th>Caffeine Amount</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              {% for caffeine_entry in caffeine_log %}
+              <tr>
+                <td>{{caffeine_entry.drink_name}}</td>
+                <td>{{caffeine_entry.caffeine_content}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- {% if total_caffeine > 400 %}
+      You have exceeded 400 mg of caffeine, please cut back from now on.
+      {% endif %} -->
+      <div class="navigation">
+        <form method="get" action="/input">
+          <input type="submit" value="Add Input"/>
+        </form>
+        <a href={{logout_url}}>Logout</a>
+      </div>
+    </section>
+  </body>
+</html>

@@ -168,7 +168,7 @@ class ProfileHandler(webapp2.RequestHandler):
         #              to='+14059820806'
         #          )
 
-        print("User caffeineentries: \n" + str(caffeine_log))
+        print("User caffeine entries: \n" + str(caffeine_log))
 
         logout_url = users.create_logout_url('/')
 
@@ -180,8 +180,8 @@ class ProfileHandler(webapp2.RequestHandler):
             "total_caffeine": total_caffeine
         }
 
-        profile_template = jinja_env.get_template("templates/profile.html")
-        self.response.write(profile_template.render(template_vars))
+        output_template = jinja_env.get_template("templates/output.html")
+        self.response.write(output_template.render(template_vars))
         print("==========Printed out coffee log==========")
 
 app = webapp2.WSGIApplication([
