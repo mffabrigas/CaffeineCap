@@ -2,7 +2,18 @@ import webapp2
 import jinja2
 import os
 import time
-from app_models import User, Coffee_Entry
+from google.appengine.api import users
+from app_models import Account, Caffeine_Entry
+from seed_caffeine_data import caffeine_dataset
+
+# Download the helper library from https://www.twilio.com/docs/python/install
+# from twilio.rest import Client
+
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+# account_sid = 'ACf685fe7e50b6b180c603855486614139'
+# auth_token = 'e7e6abe43ba7156c5efcd19baf64c0b0'
+# client = Client(account_sid, auth_token)
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -10,87 +21,174 @@ jinja_env = jinja2.Environment(
     autoescape=True
 )
 
+# class LoadDataHandler(webapp2.RequestHandler):
+#     def get(self):
+#         seed_data()
+
 class MainHandler(webapp2.RequestHandler):
+    #renders welcome page with Google login url
     def get(self):
-        print("MainHandler works!")
+        print("MainHandler GET works!")
 
-class LoginHandler(webapp2.RequestHandler):
+        login_url = users.create_login_url('/checkuser')
+        main_template = jinja_env.get_template('templates/main.html')
+        template_vars = {
+            "login_url": login_url,
+        }
+        self.response.write(main_template.render(template_vars))
+
+class CheckHandler(webapp2.RequestHandler):
+    #routed from Google login url on welcome page, check is user has account
     def get(self):
-        login_template = jinja_env.get_template('templates/login.html')
-        self.response.write(login_template.render())
+        print("CheckHandler GET works!")
 
+        user = users.get_current_user()
 
-class InputHandler(webapp2.RequestHandler):
-    # renders index.html
-    def get(self):
-        print("InputHandler works!")
+        print("User at Check: " + str(user))
 
-        input_template = jinja_env.get_template("templates/input.html")
-        self.response.write(input_template.render())
-
-    def post(self):
-        print("InputHandler works!")
-
-        input_template = jinja_env.get_template("templates/input.html")
-        self.response.write(input_template.render())
+        #if user has acct, send to input page; if not, send to register page
+        if user:
+            if not Account.get_by_user(user):
+                print("Sent to register page")
+                self.redirect("/register")
+            else:
+                print("Sent to input page")
+                self.redirect("/input")
 
 class RegisterHandler(webapp2.RequestHandler):
+    # renders register page
     def get(self):
+        print("RegisterHandler GET works!")
+
         register_template = jinja_env.get_template('templates/register.html')
         self.response.write(register_template.render())
 
+    # creates and put new account based on user google login
     def post(self):
-        register_firstname = self.request.get('register_firstname')
-        register_lastname = self.request.get('register_lastname')
-        register_username = self.request.get('register_username')
-        register_password = self.request.get('register_password')
-        register_email = self.request.get('register_email')
-        new_user = User(firstname = register_firstname, lastname = register_lastname, username = register_username, password = register_password, email = register_email)
-        new_user.put()
+        print("RegisterHandler INPUT works!")
 
-class ProfileHandler(webapp2.RequestHandler):
+        user = users.get_current_user()
+        user_id = user.user_id()
+
+        first_name = self.request.get("register_firstname")
+        last_name = self.request.get("register_lastname")
+        email = self.request.get("register_email")
+        phone_number = self.request.get("register_phonenumber")
+
+        acct = Account(user_id=user_id,
+                       first_name=first_name,
+                       last_name=last_name,
+                       email=email,
+                       phone_number=phone_number)
+        acct.put()
+
+        self.redirect("/input")
+
+class InputHandler(webapp2.RequestHandler):
+    #renders input page with logout url
     def get(self):
-        print("ProfileHandler works!")
-        profile_template = jinja_env.get_template("templates/profile.html")
-        self.response.write(profile_template.render())
+        print("InputHandler GET works!")
 
-        # coffee_entry.put()
-        #
-        # profile_template = jinja_env.get_template("templates/profile.html")
-        # self.response.write(profile_template.render({"coffee_log": coffee_log, "new_log": coffee_entry}))
+        logout_url = users.create_logout_url('/')
+
+        input_template = jinja_env.get_template('templates/input.html')
+        template_vars = {
+            'logout_url': logout_url
+        }
+        self.response.write(input_template.render(template_vars))
 
     def post(self):
-        #reads in all Coffee_Entry entities in an array and renders it into profile page
-        #gets user input from textbox
-        coffee_type = self.request.get("coffee_type")
-        print("Coffee Type Inputted: " + self.request.get("coffee_type"))
+        print("InputHandler POST works!")
 
-        caffeine_amount = int(self.request.get("caffeine_amount"))
-        print("Caffeine Content Inputted: " + self.request.get("caffeine_amount"))
+        # gets current google login user and their associated account
+        user = users.get_current_user()
+        print("Google login: " + str(user))
+
+        acct = Account.get_by_user(user)
+        print("Datastore user account object: " + str(acct))
+
+        # =====================================================================
+        # creates new coffee entry and puts it
+        caffeine_drink = self.request.get("caffeine_drink")
+        print("User input drink: " + str(caffeine_drink))
+        print("Caffeine Drink Inputted: " + caffeine_drink)
+
+        caffeine_content = float(caffeine_dataset(caffeine_drink))
 
         print("==========User input taken==========")
 
         #creates and enters Coffee_Entry entity into datastore based on user input
-        coffee_entry = Coffee_Entry(type=coffee_type,
-                                    caffeine_content=caffeine_amount,
-                                    time=time.strftime('%l:%M%p %Z on %b %d, %Y')
-                                    )
-        print("Coffee entry entity created: " + str(coffee_entry))
+        caffeine_entry = Caffeine_Entry(drink_name=caffeine_drink,
+                                        caffeine_content=int(caffeine_content),
+                                        time=time.strftime('%I:%M%p %Z on %b %d, %Y'),
+                                        ).put()
+        print("Caffeine entry entity created: " + str(caffeine_entry))
 
-        coffee_entry.put()
-        print("==========Coffee_Entry put==========")
+        print("==========Caffeine_Entry put==========")
 
-        coffee_log = Coffee_Entry.query().order(Coffee_Entry.time).fetch()
-        print("List of Coffee_Entry entities: \n" + str(coffee_log))
-        profile_template = jinja_env.get_template("templates/profile.html")
-        self.response.write(profile_template.render({"coffee_log": coffee_log, "new_log": coffee_entry}))
+        # =====================================================================
+        # put coffee entry into current user's coffee log and update user into datastore
+        acct.caffeine_entries.append(caffeine_entry)
+        acct.put()
+
+        print("==========Caffeine_Entry put into current user==========")
+
+        self.redirect("/profile")
+
+class ProfileHandler(webapp2.RequestHandler):
+    #renders profile that welcomes user, prints out log of coffee entries, and displays if over recommended caffeine
+    def get(self):
+        print("ProfileHandler GET works!")
+
+        user = users.get_current_user()
+        print("Google login: " + str(user))
+
+        acct = Account.get_by_user(user)
+        print("Datastore user account object: " + str(acct))
+
+        # =====================================================================
+        # gets user's log of keys of their coffee entries and creates log of coffee entries from keys
+        caffeine_keys = acct.caffeine_entries
+        print("user caffeine keys: " + str(acct.caffeine_entries))
+
+        caffeine_log =[]
+        for caffeine_entry in caffeine_keys:
+            caffeine_log.append(caffeine_entry.get())
+
+        # calculates total caffeine from coffee entries
+        total_caffeine = 0
+        for caffeine_entry in caffeine_log:
+            total_caffeine = total_caffeine + caffeine_entry.caffeine_content
+
+        # if total_caffeine > 400:
+        #     message = client.messages \
+        #         .create(
+        #              body="Please stop drinking coffee for the sake of your health",
+        #              from_='+19728939502',
+        #              to='+14059820806'
+        #          )
+
+        print("User caffeine entries: \n" + str(caffeine_log))
+
+        logout_url = users.create_logout_url('/')
+
+        template_vars = {
+            "user_nickname": acct.first_name,
+            "caffeine_log": caffeine_log,
+            # "new_entry": coffee_entry,
+            "logout_url": logout_url,
+            "total_caffeine": total_caffeine
+        }
+
+        output_template = jinja_env.get_template("templates/output.html")
+        self.response.write(output_template.render(template_vars))
         print("==========Printed out coffee log==========")
-
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
-    ("/login", LoginHandler),
-    ("/input", InputHandler),
+    ("/checkuser", CheckHandler),
     ("/register", RegisterHandler),
+    ("/input", InputHandler),
     ("/profile", ProfileHandler),
+    # ("/seed-data", LoadDataHandler)
 ], debug=True)

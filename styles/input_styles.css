@@ -3,7 +3,7 @@
   margin: 0;
 }
 body{
-  background: url(chair-coffee-shop-counter-597929.jpg);
+  background-image: url("../styles/chair-coffee-shop-counter-597929.jpg");
   display: flex;
   /* align-items: center;
   justify-content: center;*/
@@ -115,6 +115,7 @@ h2{
   background-color: black;
   color: #e0bca6;
 }
+
 .list-item{
   list-style: none;
   margin: 0px 20px;

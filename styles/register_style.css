@@ -1,7 +1,7 @@
 body{
   margin: 0;
   padding: 0;
-  background: url(../styles/background.jpg);
+  background: url("../styles/background.jpg");
   background-size: cover;
   display: flex;
   flex-direction: column;
