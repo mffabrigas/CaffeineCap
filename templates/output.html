@@ -2,21 +2,21 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="../styles/output_style.css">
+    <script src="scripts/output_script.js"></script>
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
     <section>
       <h1>Welcome, {{user_nickname}}</h1>
-      <h2>CoffeeCap</h2>
+      <h2>Today</h2>
       <div class="full_table">
-
         <div class="tbl-header">
           <table cellpadding="0" cellspacing="0" border="0">
             <thead>
               <tr>
-                <th>Coffee</th>
-                <th>Caffeine Amount</th>
+                <th>Caffeine Drink</th>
+                <th>Caffeine Amount (mg)</th>
               </tr>
             </thead>
           </table>
@@ -34,12 +34,25 @@
           </table>
         </div>
       </div>
-      <!-- {% if total_caffeine > 400 %}
-      You have exceeded 400 mg of caffeine, please cut back from now on.
-      {% endif %} -->
+      {% if caffeine_per_day == None %}
+      You have drank {{total_caffeine}} mg of caffeine today.
+      {% endif %}
+      {% if total_caffeine > 400 and caffeine_per_day == None %}
+      <p id="warning">You have exceeded 400 mg of caffeine, please cut back from now on.</p>
+      {% endif %}
+      {% if caffeine_per_day != None %}
+      <p id="per_day">You drink {{caffeine_per_day}} mg of caffeine per day</p>
+        {% if caffeine_per_day > 400 %}
+        <p id="warning">You have exceeded 400 mg of caffeine per day, please cut back from now on.</p>
+        {% endif %}
+      {% endif %}
+      <!-- <input type="hidden" id="hidden" name="hidden" value="blank"> -->
       <div class="navigation">
         <form method="get" action="/input">
           <input type="submit" value="Add Input"/>
+        </form>
+        <form method="get" action="/link">
+          <input type="submit" id="this_week" value="This Week"/>
         </form>
         <a href={{logout_url}}>Logout</a>
       </div>

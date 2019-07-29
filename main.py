@@ -121,6 +121,7 @@ class InputHandler(webapp2.RequestHandler):
         caffeine_entry = Caffeine_Entry(drink_name=caffeine_drink,
                                         caffeine_content=int(caffeine_content),
                                         time=time.strftime('%I:%M%p %Z on %b %d, %Y'),
+                                        week=time.strftime('%U'),
                                         ).put()
         print("Caffeine entry entity created: " + str(caffeine_entry))
 
@@ -177,12 +178,51 @@ class ProfileHandler(webapp2.RequestHandler):
             "caffeine_log": caffeine_log,
             # "new_entry": coffee_entry,
             "logout_url": logout_url,
-            "total_caffeine": total_caffeine
+            "total_caffeine": total_caffeine,
+            "caffeine_per_day": None
         }
 
         output_template = jinja_env.get_template("templates/output.html")
         self.response.write(output_template.render(template_vars))
         print("==========Printed out coffee log==========")
+
+class LinkHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user();
+        acct = Account.get_by_user(user)
+
+        caffeine_keys = acct.caffeine_entries
+        print("LinkHandler user caffeine keys: " + str(acct.caffeine_entries))
+
+        caffeine_log =[]
+        for caffeine_entry in caffeine_keys:
+            caffeine_log.append(caffeine_entry.get())
+        print("LinkHandler user caffeine log: " + str(caffeine_log))
+
+        week_entries = []
+        for drink in caffeine_log:
+            if drink.week == time.strftime("%U"):
+                week_entries.append(drink)
+        print("LinkHandler user week caffeine log: " + str(week_entries))
+
+        logout_url = users.create_logout_url('/')
+
+        total_caffeine = 0
+        for caffeine_entry in week_entries:
+            total_caffeine = total_caffeine + caffeine_entry.caffeine_content
+
+        caffeine_per_day = total_caffeine/(int(time.strftime("%w"))+1)
+
+        template_vars = {
+            "user_nickname": acct.first_name,
+            "caffeine_log": week_entries,
+            "logout_url": logout_url,
+            "total_caffeine": total_caffeine,
+            "caffeine_per_day": caffeine_per_day
+        }
+
+        output_template = jinja_env.get_template("templates/output.html")
+        self.response.write(output_template.render(template_vars))
 
 app = webapp2.WSGIApplication([
     ("/", MainHandler),
@@ -190,5 +230,6 @@ app = webapp2.WSGIApplication([
     ("/register", RegisterHandler),
     ("/input", InputHandler),
     ("/profile", ProfileHandler),
+    ("/link", LinkHandler),
     # ("/seed-data", LoadDataHandler)
 ], debug=True)

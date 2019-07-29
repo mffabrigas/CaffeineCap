@@ -1,4 +1,5 @@
 from google.appengine.ext import ndb
+import time
 
 # class Caffeine_Drink(ndb.Model):
 #     drink_name = ndb.StringProperty(required=True)
@@ -15,6 +16,12 @@ class Caffeine_Entry(ndb.Model):
     drink_name = ndb.StringProperty(required=True)
     caffeine_content = ndb.IntegerProperty(required=True)
     time = ndb.StringProperty(required=True)
+    week = ndb.StringProperty(required=True)
+
+    # @classmethod
+    # def get_week_entries(cls):
+    #     current_week = time.strftime('%U')
+    #     return cls.query().filter(cls.week == current_week)
 
 #One to Many
 class Account(ndb.Model):
@@ -28,6 +35,3 @@ class Account(ndb.Model):
     @classmethod
     def get_by_user(cls, user):
         return cls.query().filter(cls.user_id == user.user_id()).get()
-
-    def get_coffee_entries():
-        pass
