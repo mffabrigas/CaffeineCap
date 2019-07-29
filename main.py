@@ -122,6 +122,7 @@ class InputHandler(webapp2.RequestHandler):
                                         caffeine_content=int(caffeine_content),
                                         time=time.strftime('%I:%M%p %Z on %b %d, %Y'),
                                         week=time.strftime('%U'),
+                                        date=time.strftime('%m %d %y'),
                                         ).put()
         print("Caffeine entry entity created: " + str(caffeine_entry))
 
@@ -154,7 +155,9 @@ class ProfileHandler(webapp2.RequestHandler):
 
         caffeine_log =[]
         for caffeine_entry in caffeine_keys:
-            caffeine_log.append(caffeine_entry.get())
+            temp = caffeine_entry.get()
+            if temp.date == time.strftime('%m %d %y'):
+                caffeine_log.append(temp)
 
         # calculates total caffeine from coffee entries
         total_caffeine = 0

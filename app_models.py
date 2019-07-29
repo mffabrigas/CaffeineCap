@@ -17,6 +17,7 @@ class Caffeine_Entry(ndb.Model):
     caffeine_content = ndb.IntegerProperty(required=True)
     time = ndb.StringProperty(required=True)
     week = ndb.StringProperty(required=True)
+    date = ndb.StringProperty(required=True)
 
     # @classmethod
     # def get_week_entries(cls):
