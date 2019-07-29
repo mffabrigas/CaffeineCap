@@ -34,6 +34,7 @@
           </table>
         </div>
       </div>
+      <div class = "output_text">
       {% if caffeine_per_day == None %}
       You have drank {{total_caffeine}} mg of caffeine today.
       {% endif %}
@@ -46,6 +47,7 @@
         <p id="warning">You have exceeded 400 mg of caffeine per day, please cut back from now on.</p>
         {% endif %}
       {% endif %}
+    </div>
       <!-- <input type="hidden" id="hidden" name="hidden" value="blank"> -->
       <div class="navigation">
         <form method="get" action="/input">

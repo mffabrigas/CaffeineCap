@@ -55,7 +55,6 @@ section{
   border-radius: 10px;
   background: rgba(0,0,0,0.5);
 }
-
 /* follow me template */
 .made-with-love {
   margin-top: 40px;
@@ -80,7 +79,14 @@ section{
 .made-with-love a:hover {
   text-decoration: underline;
 }
-
+.output_text{
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  margin: auto;
+  color: white;
+  text-align: center;
+  font-size: 50px;
+}
 
 /* for custom scrollbar for webkit browser*/
 
