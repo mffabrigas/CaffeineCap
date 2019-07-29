@@ -61,6 +61,9 @@ body{
 h2{
   color: white;
   text-align: center;
+  font-family: serif;
+  padding: 10px;
+
 }
 
 /* h1{
@@ -160,6 +163,23 @@ input[type=submit] {
   background-color: DodgerBlue;
   color: #fff;
 }
+
+#myInput{
+  display: flex;
+  margin:auto;
+  padding-right: 20%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  min-height:50px;
+  min-width: 150px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+}
+
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -185,4 +205,18 @@ input[type=submit] {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+#subButton{
+  background-color: #e0bca6;
+  border: none;
+  color: white;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer
+}
+
+#subButton:hover {
+  background-color: black;
+  color: #e0bca6;
 }
