@@ -3,22 +3,30 @@ body{
   padding: 0;
   background: url(../styles/background.jpg);
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .topBar{
-  padding-top: 40px;
+  padding-top: 10px;
   width: 100%;
   height: 40px;
   color: #fff;
+  margin-bottom: 5%;
+  padding-bottom: 0;
+  justify-content: center;
   text-align: center;
   font-size: 60px;
   font-family: "Pacifico", cursive;
 }
 .registerBox{
   color: white;
-  position: absolute;
+  margin-top: 5%;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%); */
   width: 400px;
   height:500px;
   box-sizing: border-box;

@@ -1,29 +1,71 @@
+*{
+  padding: 0;
+  margin: 0;
+}
 body{
-  background-image: url(chair-coffee-shop-counter-597929.jpg);
+  background: url(chair-coffee-shop-counter-597929.jpg);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: none;
-  margin: none;
-  background-size: 100%;
+  /* align-items: center;
+  justify-content: center;*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-height: 100%;
+  width: 100%;
+  flex-direction: column;
+
 }
 
+.top{
+  justify-content: center;
+  align-items: center;
+
+}
+
+.menu{
+  float: right;
+  height: 10vh;
+}
+
+.menu ul{
+  overflow: hidden;
+  display: inline-flex;
+  margin: 25px;
+}
+
+
+
 .coffee_log{
+  display: flex;
   flex-direction: column;
   flex-flow: column;
-  padding: 10%;
-  background-color: #40200d;
-  margin:5%;
+  padding: 5%;
+  background-color: rgba(64, 32, 13, 0.7);
+  margin:50px auto;
   align-content: center;
   justify-content: center;
+  border-radius: 10px;
 
+}
+
+#topCoff{
+
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
+  color: white;
+  font-weight: lighter;
+  text-align: center;
 }
 
 #siteHead{
   align-items: center;
 }
 
-h1{
+h2{
+  color: white;
+  text-align: center;
+}
+
+/* h1{
   font-family: 'Pacifico', cursive;
   font-size: 30px;
   color: white;
@@ -32,27 +74,27 @@ h1{
   margin: 10%;
   padding:2%;
   align-self: center;
+} */
+::placeholder{
+  color: rgba(255,255,255,0.5);
 }
-
 
 .putCoff{
    display: flex;
-   justify-content: center;
-   align-items: center;
    margin:auto;
-   padding-left: 20%;
    padding-right: 20%;
    margin-top: 5%;
    margin-bottom: 5%;
-
+   min-height:50px;
+   min-width: 150px;
+   border: none;
+   border-bottom: 1px solid #fff;
+   background: transparent;
+   outline: none;
+   color: #fff;
+   font-size: 16px;
 }
 
-
-placeholder {
-  align-items: center;
-  justify-content: center;
-  font-style:
-}
 
 #subCof{
   background-color: #e0bca6;
@@ -72,4 +114,27 @@ placeholder {
 #subCof:hover {
   background-color: black;
   color: #e0bca6;
+}
+.list-item{
+  list-style: none;
+  margin: 0px 20px;
+  cursor: pointer;
+  color: white;
+}
+.list-item:hover{
+  border-bottom: 1px solid black;
+  color: #ee156d;
+}
+
+
+img{
+  min-width: 51.2px;
+  max-width: 51.2px;
+  height: 51.2px;
+  margin-top: -20px;
+  margin: 10px 20px;
+  cursor: pointer;
+  overflow: hidden;
+  display: inline-flex;
+
 }
