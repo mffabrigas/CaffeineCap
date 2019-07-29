@@ -9,15 +9,20 @@
   <body>
     <div class="coffee_log">
       <div id="siteHead">
-        <h1>Coffee Log</h1>
+        <h1>Caffeine Log</h1>
         <p id="little"> by CoffeeCap</p>
       </div>
-      <form method="post" action="/profile">
-        <input type="text" name="coffee_type" placeholder="Coffee Type" class="putCoff" required> <br>
-        <input type="text" name="caffeine_amount" placeholder="Caffeine Amount" class="putCoff"required> <br>
-        <input type="submit" value="Submit" class= "putCoff">
+      <!-- <form method="post"> -->
+        <!--Make sure the form has the autocomplete function switched off:-->
+      <form method="post" autocomplete="off">
+        <div class="autocomplete" style="width:300px;">
+          <input id="myInput" type="text" name="caffeine_drink" placeholder="Caffeine Drink">
+        </div>
+        <input type="submit">
       </form>
+      <!-- </form> -->
       <a href={{logout_url}}>Logout</a>
     </div>
   </body>
+  <script src="scripts/input_script.js"></script>
 </html>

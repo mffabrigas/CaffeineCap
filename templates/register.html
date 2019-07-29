@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -11,28 +10,21 @@
     <link rel="stylesheet" href="../styles/register_style.css">
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title>CoffeeCap | Register</title>
+    <title>CaffeineCap | Register</title>
   </head>
   <body>
     <div class = "topBar">
-      CoffeeCap
+      CaffeineCap
     </div>
     <div class = "registerBox">
-    <h2>  Register Here</h2>
-    <form action = "/register" method = "post">
-      First Name
-      <input type = "text"  id = "register-firstname" name = "register_firstname"placeholder = "First Name" required>
-      <br>
-      <input type = "text" id = "register-lastname" name = "register_lastname" placeholder = "Last Name" required>
-
-        <input type = "text" id = "register-username" name = "register_username" placeholder = "Username" required>
-
-        <input type = "password" id = "register-password" name = "register_password" placeholder = "Password" required>
-
-        <input type = "text" id = "register-email" name = "register_email" placeholder = "Email" required>
-        <input id = "register-button" type="submit" value="Register">
-        Already Registered?  <a href = "/login" > Login</a>
+    <h2>Register Here</h2>
+    <form  method = "post">
+      <input type = "text"  id = "register-firstname" name = "register_firstname"placeholder = "First Name" required><br>
+      <input type = "text" id = "register-lastname" name = "register_lastname" placeholder = "Last Name" required><br>
+      <input type = "text" id = "register-email" name = "register_email" placeholder = "Email" required><br>
+      <input type="text" name="register_phonenumber" placeholder="Phone Number" required> <br>
+      <input id = "register-button" type="submit" value="Register"><br>
     </div>
-
+    Already Registered? <a href="/input">Login</a>
   </body>
 </html>

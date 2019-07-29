@@ -1,16 +1,17 @@
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
-body{
+
+body {
     height: 100%;
-    background: url(../styles/main_background.jpg);
+    background: url("../styles/main_background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-h1{
+h1 {
   padding: 5% 0%;
   font-family: "Pacifico", cursive;
 }
@@ -18,7 +19,7 @@ h1{
   width: 100%;
   height: 100%;
 } */
-.menu{
+.menu {
   float: right;
 }
 .menu ul{

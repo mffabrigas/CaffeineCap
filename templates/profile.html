@@ -2,28 +2,28 @@
 <html>
   <head>
      <title>User Coffee Profile</title>
-     <link src="script/profile_script.js"></link>
   </head>
   <body>
     <div class="coffee_log">
       <h1>Welcome, {{user_nickname}}</h1>
       <h2>Coffee Consumption Log</h2>
       <ul>
-          {% for coffee_entry in coffee_log %}
+          {% for caffeine_entry in caffeine_log %}
           <li>
-            Time: {{coffee_entry.time}}<br>
-            Type: {{coffee_entry.type}}<br>
-            Caffeine Content: {{coffee_entry.caffeine_content}}
+            <!-- Time: {{caffeine_entry.time}}<br> -->
+            Type: {{caffeine_entry.drink_name}}<br>
+            Caffeine Content: {{caffeine_entry.caffeine_content}}
           </li>
           {% endfor %}
       </ul><br>
       You have had {{total_caffeine}} mg of caffeine today.<br>
-      {% if total_caffeine > 400%}
+
+      {% if total_caffeine > 400 %}
       You have exceeded 400 mg of caffeine, please cut back from now on.
       {% endif %}
     </div>
 
-    <div class="navigation_buttons">
+    <div class="navigation">
       <form method="get" action="/input">
         <input type="submit" value="Add Input"/>
       </form>
